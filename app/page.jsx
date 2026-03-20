@@ -67,7 +67,7 @@ export default function App() {
 
   return (
     <div className="p-6 grid gap-6 max-w-5xl mx-auto text-slate-900 font-sans">
-      <h1 className="text-3xl font-bold text-center mb-4">Sistema Profissional de Custos</h1>
+      <h1 className="text-3xl font-bold text-center mb-4">Sistema de Precificação de Custos</h1>
 
       {/* HEADER DE RECEITA */}
       <Card className="bg-slate-50 border-slate-200">
