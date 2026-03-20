@@ -1,39 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
-export default function App() {
-  const [ingredientes, setIngredientes] = useState([]);
-  const [embalagens, setEmbalagens] = useState([]);
-  const [horas, setHoras] = useState(0);
-  const [valorHora, setValorHora] = useState(0);
-  const [transporte, setTransporte] = useState(0);
-  const [quantidadeProducao, setQuantidadeProducao] = useState(1);
-  const [lucro, setLucro] = useState(50);
-  const [nomeReceita, setNomeReceita] = useState("");
-
-  // 💾 FUNÇÃO PARA SALVAR
-  const salvarDados = () => {
-    const dados = {
-      nomeReceita,
-      ingredientes,
-      embalagens,
-      horas,
-      valorHora,
-      transporte,
-      quantidadeProducao,
-      lucro
-    };
-    localStorage.setItem("@Calculadora:Receita", JSON.stringify(dados));
-"use client";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -54,7 +21,6 @@ export default function App() {
 
   const unidades = ["g", "kg", "ml", "L", "un"];
 
-  // 💾 Função para Salvar no Navegador
   const salvarDados = () => {
     const dados = {
       nomeReceita, ingredientes, embalagens, horas, 
@@ -64,7 +30,6 @@ export default function App() {
     alert("Dados salvos com sucesso!");
   };
 
-  // 📂 Função para Carregar do Navegador
   const carregarDados = () => {
     const salvo = localStorage.getItem("@Calculadora:Dados");
     if (salvo) {
@@ -97,7 +62,6 @@ export default function App() {
     setLista(nova);
   };
 
-  // Lógica de Cálculos
   const custoIngredientes = ingredientes.reduce((t, i) => {
     const custoUnitarioReal = i.quantidadeCompra > 0 ? i.precoCompra / i.quantidadeCompra : 0;
     return t + (i.quantidade * custoUnitarioReal);
@@ -117,10 +81,9 @@ export default function App() {
   ].filter(item => item.value > 0);
 
   return (
-    <div className="p-6 grid gap-6 max-w-4xl mx-auto">
+    <div className="p-6 grid gap-6 max-w-4xl mx-auto text-slate-900">
       <h1 className="text-3xl font-bold text-center">Sistema Profissional de Custos</h1>
 
-      {/* HEADER */}
       <Card className="bg-slate-50">
         <CardContent className="p-4 grid grid-cols-1 md:grid-cols-3 gap-3">
           <div className="md:col-span-1">
@@ -134,7 +97,6 @@ export default function App() {
         </CardContent>
       </Card>
 
-      {/* INGREDIENTES */}
       <Card>
         <CardContent className="p-4">
           <h2 className="font-semibold mb-3">Ingredientes</h2>
@@ -147,14 +109,13 @@ export default function App() {
               </select>
               <Input type="number" placeholder="Qtd Compra" value={item.quantidadeCompra} className="h-8 text-xs" onChange={(e) => atualizar(ingredientes, setIngredientes, i, "quantidadeCompra", Number(e.target.value))} />
               <Input type="number" placeholder="Preço" value={item.precoCompra} className="h-8 text-xs" onChange={(e) => atualizar(ingredientes, setIngredientes, i, "precoCompra", Number(e.target.value))} />
-              <div className="text-xs font-bold">R$ {(item.quantidade * (item.precoCompra / (item.quantidadeCompra || 1))).toFixed(2)}</div>
+              <div className="text-xs font-bold text-slate-700">R$ {(item.quantidade * (item.precoCompra / (item.quantidadeCompra || 1))).toFixed(2)}</div>
             </div>
           ))}
-          <Button onClick={adicionarIngrediente} variant="ghost" className="h-8 text-xs mt-2">+ Adicionar</Button>
+          <Button onClick={adicionarIngrediente} variant="ghost" className="h-8 text-xs mt-2">+ Adicionar Item</Button>
         </CardContent>
       </Card>
 
-      {/* RESULTADO E GRÁFICO */}
       <Card className="bg-slate-900 text-white shadow-xl">
         <CardContent className="p-6 grid md:grid-cols-2 gap-6">
           <div>
@@ -168,10 +129,10 @@ export default function App() {
           </div>
           
           <div className="flex flex-col items-center">
-            <div className="w-full h-40">
+            <div className="w-full h-48">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie data={dadosGrafico} dataKey="value" nameKey="name" outerRadius={60}>
+                  <Pie data={dadosGrafico} dataKey="value" nameKey="name" outerRadius={60} label>
                     {dadosGrafico.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
