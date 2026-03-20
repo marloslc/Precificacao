@@ -246,7 +246,7 @@ export default function App() {
       </Card>
       
       <footer className="text-center text-slate-400 text-[10px] uppercase font-bold tracking-widest mt-8">
-        Gear One © 2026 - Ferramenta de Gestão Financeira STEM Racing
+        Precifica - Ferramenta de Gestão Financeira
       </footer>
     </div>
   );
