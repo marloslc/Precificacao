@@ -193,57 +193,68 @@ export default function App() {
       </Card>
 
       {/* DASHBOARD FINAL */}
-      <Card className="bg-white shadow-xl border-slate-200 overflow-hidden">
-        <CardContent className="p-0">
-          <div className="grid md:grid-cols-2">
-            <div className="p-8 bg-slate-900 text-white">
-              <h2 className="text-xl font-bold mb-6 border-b border-slate-700 pb-2">Resumo Financeiro</h2>
-              <div className="space-y-4 text-sm">
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-slate-400">Total Ingredientes:</span> 
-                  <span className="font-mono">R$ {custoIngredientes.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-slate-400">Total Embalagens:</span> 
-                  <span className="font-mono">R$ {custoEmbalagens.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-slate-400">Mão de Obra:</span> 
-                  <span className="font-mono">R$ {maoDeObra.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-slate-400">Transporte:</span> 
-                  <span className="font-mono">R$ {Number(transporte).toFixed(2)}</span>
-                </div>
-                <div className="pt-4">
-                  <div className="flex justify-between text-xl font-bold text-green-400">
-                    <span>CUSTO TOTAL:</span> 
-                    <span className="font-mono">R$ {custoTotal.toFixed(2)}</span>
-                  </div>
-                  <p className="text-[10px] text-slate-500 mt-1 uppercase tracking-widest text-right italic">Custo por unidade: R$ {custoUnitario.toFixed(2)}</p>
-                </div>
-              </div>
+<Card className="bg-white shadow-xl border-slate-200 overflow-hidden">
+  <CardContent className="p-0">
+    <div className="grid md:grid-cols-2">
+      <div className="p-8 bg-slate-900 text-white">
+        <h2 className="text-xl font-bold mb-6 border-b border-slate-700 pb-2">Resumo Financeiro</h2>
+        <div className="space-y-4 text-sm">
+          <div className="flex justify-between border-b border-slate-800 pb-2">
+            <span className="text-slate-400">Total Ingredientes:</span> 
+            <span className="font-mono">R$ {custoIngredientes.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between border-b border-slate-800 pb-2">
+            <span className="text-slate-400">Total Embalagens:</span> 
+            <span className="font-mono">R$ {custoEmbalagens.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between border-b border-slate-800 pb-2">
+            <span className="text-slate-400">Mão de Obra:</span> 
+            <span className="font-mono">R$ {maoDeObra.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between border-b border-slate-800 pb-2">
+            <span className="text-slate-400">Transporte:</span> 
+            <span className="font-mono">R$ {Number(transporte).toFixed(2)}</span>
+          </div>
+          
+          {/* ÁREA ALTERADA ABAIXO */}
+          <div className="pt-4 text-right">
+            <div className="flex justify-between items-center text-[1.25rem] font-bold text-green-400 mb-2">
+              <span>CUSTO TOTAL:</span> 
+              <span className="font-mono">R$ {custoTotal.toFixed(2)}</span>
             </div>
-            
-            <div className="p-8 flex flex-col items-center justify-center">
-              <h3 className="text-sm font-bold uppercase text-slate-500 mb-6">Composição dos Custos</h3>
-              <div className="w-full h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie data={dadosGrafico} dataKey="value" nameKey="name" outerRadius={80} stroke="none">
-                      {dadosGrafico.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}} />
-                    <Legend iconType="circle" wrapperStyle={{paddingTop: '20px', fontSize: '12px'}} />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
+            <div className="mt-4">
+              <p className="text-orange-500 text-4xl font-black uppercase tracking-tight">
+                R$ {custoUnitario.toFixed(2)}
+              </p>
+              <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+                Custo por unidade
+              </p>
             </div>
           </div>
-        </CardContent>
-      </Card>
+          {/* FIM DA ÁREA ALTERADA */}
+          
+        </div>
+      </div>
+      
+      <div className="p-8 flex flex-col items-center justify-center">
+        <h3 className="text-sm font-bold uppercase text-slate-500 mb-6">Composição dos Custos</h3>
+        <div className="w-full h-64">
+          <ResponsiveContainer width="100%" height="100% text-slate-900">
+            <PieChart>
+              <Pie data={dadosGrafico} dataKey="value" nameKey="name" outerRadius={80} stroke="none">
+                {dadosGrafico.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', color: '#000'}} />
+              <Legend iconType="circle" wrapperStyle={{paddingTop: '20px', fontSize: '12px'}} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </div>
+  </CardContent>
+</Card>
       
       <footer className="text-center text-slate-400 text-[10px] uppercase font-bold tracking-widest mt-8">
         Precifica - Ferramenta de Gestão Financeira
