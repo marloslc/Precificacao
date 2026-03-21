@@ -103,11 +103,11 @@ export default function App() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Qtd na Compra</label>
+                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Qtd Comprada</label>
                   <Input type="number" value={item.quantidadeCompra} onChange={(e) => atualizar(ingredientes, setIngredientes, i, "quantidadeCompra", Number(e.target.value))} className="bg-white" />
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Preço Compra</label>
+                  <label className="text-[10px] font-bold uppercase text-slate-400 block mb-1">Preço Unitário</label>
                   <Input type="number" value={item.precoCompra} onChange={(e) => atualizar(ingredientes, setIngredientes, i, "precoCompra", Number(e.target.value))} className="bg-white" />
                 </div>
                 <div className="pb-2">
