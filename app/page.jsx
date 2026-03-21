@@ -227,7 +227,7 @@ export default function App() {
                 R$ {custoUnitario.toFixed(2)}
               </p>
               <p className="text-orange-500 text-[10px] font-bold uppercase tracking-widest">
-                Custo por unidade
+                Preço sugerido por unidade
               </p>
             </div>
           </div>
