@@ -224,7 +224,7 @@ export default function App() {
             </div>
             <div className="mt-4">
               <p className="text-orange-500 text-4xl font-black uppercase tracking-tight">
-                R$ {custoUnitario.toFixed(2)}
+                R$ {precoVenda.toFixed(2)}
               </p>
               <p className="text-orange-500 text-[10px] font-bold uppercase tracking-widest">
                 Preço sugerido por unidade
